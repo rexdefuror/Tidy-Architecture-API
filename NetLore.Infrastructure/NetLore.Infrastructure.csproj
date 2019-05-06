@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NetLore.Application.Read\NetLore.Application.Read.csproj" />
+    <ProjectReference Include="..\NetLore.Application.Write\NetLore.Application.Write.csproj" />
+    <ProjectReference Include="..\NetLore.Data\NetLore.Data.csproj" />
+    <ProjectReference Include="..\NetLore.Domain\NetLore.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
