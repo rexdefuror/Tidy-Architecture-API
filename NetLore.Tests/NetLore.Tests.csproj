@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.0" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Moq" Version="4.10.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NetLore.Application.Read\NetLore.Application.Read.csproj" />
+    <ProjectReference Include="..\NetLore.Application.Write\NetLore.Application.Write.csproj" />
+    <ProjectReference Include="..\NetLore.Data\NetLore.Data.csproj" />
+    <ProjectReference Include="..\NetLore.Domain\NetLore.Domain.csproj" />
+    <ProjectReference Include="..\NetLore.Infrastructure\NetLore.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

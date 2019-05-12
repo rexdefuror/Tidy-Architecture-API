@@ -13,15 +13,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetLore.Data", "NetLore.Data\NetLore.Data.csproj", "{4FC25BC8-EBEA-4825-88BE-69BACDCBE941}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetLore.Domain", "NetLore.Domain\NetLore.Domain.csproj", "{3180D3E0-05D8-47E5-83A6-F9000AE89139}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetLore.Domain", "NetLore.Domain\NetLore.Domain.csproj", "{3180D3E0-05D8-47E5-83A6-F9000AE89139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetLore.Infrastructure", "NetLore.Infrastructure\NetLore.Infrastructure.csproj", "{509C23BA-188A-41DA-B3D4-E0E584030D44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetLore.Infrastructure", "NetLore.Infrastructure\NetLore.Infrastructure.csproj", "{509C23BA-188A-41DA-B3D4-E0E584030D44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetLore.Api", "NetLore.Api\NetLore.Api.csproj", "{5AFB4CE0-7D33-4317-B82A-6D2A22A2CA0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetLore.Api", "NetLore.Api\NetLore.Api.csproj", "{5AFB4CE0-7D33-4317-B82A-6D2A22A2CA0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetLore.Application.Read", "NetLore.Application.Read\NetLore.Application.Read.csproj", "{2D081E89-B124-423F-9BC0-D9B07A9CCA81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetLore.Application.Read", "NetLore.Application.Read\NetLore.Application.Read.csproj", "{2D081E89-B124-423F-9BC0-D9B07A9CCA81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetLore.Application.Write", "NetLore.Application.Write\NetLore.Application.Write.csproj", "{F966140E-E876-4EC4-B1E6-F3A074C2F9F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetLore.Application.Write", "NetLore.Application.Write\NetLore.Application.Write.csproj", "{F966140E-E876-4EC4-B1E6-F3A074C2F9F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{137DA350-A6FD-46BF-B13D-0E2579D4E70F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetLore.Tests", "NetLore.Tests\NetLore.Tests.csproj", "{2E075CFB-F2F6-4344-8095-0DEDB35230EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,10 @@ Global
 		{F966140E-E876-4EC4-B1E6-F3A074C2F9F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F966140E-E876-4EC4-B1E6-F3A074C2F9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F966140E-E876-4EC4-B1E6-F3A074C2F9F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E075CFB-F2F6-4344-8095-0DEDB35230EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E075CFB-F2F6-4344-8095-0DEDB35230EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E075CFB-F2F6-4344-8095-0DEDB35230EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E075CFB-F2F6-4344-8095-0DEDB35230EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +72,7 @@ Global
 		{5AFB4CE0-7D33-4317-B82A-6D2A22A2CA0F} = {6C949C33-DB90-440A-9B35-4DDC49E42DB0}
 		{2D081E89-B124-423F-9BC0-D9B07A9CCA81} = {4F13F1C7-8D18-4002-96D6-BA35E419FB7A}
 		{F966140E-E876-4EC4-B1E6-F3A074C2F9F3} = {4F13F1C7-8D18-4002-96D6-BA35E419FB7A}
+		{2E075CFB-F2F6-4344-8095-0DEDB35230EE} = {137DA350-A6FD-46BF-B13D-0E2579D4E70F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C165635-6B4B-453B-90B4-E888ED294866}
