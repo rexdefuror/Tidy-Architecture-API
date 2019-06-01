@@ -82,6 +82,18 @@ namespace NetLore.Tests.Requests
             Assert.AreEqual(isValid, validationResult.IsValid);
         }
 
+
+        [TestMethod]
+        public async Task SaveTaskList_Success()
+        {
+            var model = new Domain.Models.TaskList { Name = "TestTaskList" };
+            var request = new SaveTaskListRequest(model);
+
+            var handler = new SaveTaskListRequestHandler(_trackingContext, Mapper.Instance);
+            var result = await handler.Handle(request, default(CancellationToken));
+            Assert.AreEqual(result, Unit.Value);
+        }
+
         [TestMethod]
         public async Task UpdateTaskList_Success()
         {
