@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
@@ -13,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NetLore.Domain\NetLore.Domain.csproj" />
     <ProjectReference Include="..\NetLore.Infrastructure\NetLore.Infrastructure.csproj" />
+    <ProjectReference Include="..\NetLore.Intersection\NetLore.Intersection.csproj" />
   </ItemGroup>
 
 </Project>

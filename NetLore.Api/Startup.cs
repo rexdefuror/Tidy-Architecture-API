@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NetLore.Api.Filters;
 using NetLore.Infrastructure.Extensions;
 
 namespace NetLore.Api
@@ -22,7 +23,10 @@ namespace NetLore.Api
             services.AddAutoMapperWithProfiles();
             services.AddDatabaseContexts(Configuration);
             services.AddMediatorWithRequests();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new ValidationExceptionFilter());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddFluentValidators();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -68,6 +68,20 @@ namespace NetLore.Tests.Requests
             Assert.AreEqual(selectedId, result.Id);
         }
 
+        [DataTestMethod]
+        [DataRow(0, false)]
+        [DataRow(1, true)]
+        [DataRow(4545, true)]
+        public async Task FindTaskById_Validation(int id, bool isValid)
+        {
+            var request = new FindTaskByIdRequest(id);
+
+            var validator = new FindTaskByIdValidator();
+            var validationResult = await validator.ValidateAsync(request);
+
+            Assert.AreEqual(isValid, validationResult.IsValid);
+        }
+
         [TestMethod]
         public async Task SaveTask_Success()
         {
@@ -104,6 +118,20 @@ namespace NetLore.Tests.Requests
             var handler = new DeleteTaskRequestHandler(_trackingContext);
             var result = await handler.Handle(request, default(CancellationToken));
             Assert.AreEqual(Unit.Value, result);
+        }
+
+        [DataTestMethod]
+        [DataRow(0, false)]
+        [DataRow(1, true)]
+        [DataRow(3243243, true)]
+        public async Task DeleteTask_Validation(int id, bool isValid)
+        {
+            var request = new DeleteTaskRequest(id);
+
+            var validator = new DeleteTaskValidator();
+            var validationResult = await validator.ValidateAsync(request);
+
+            Assert.AreEqual(isValid, validationResult.IsValid);
         }
 
         [TestCleanup]
