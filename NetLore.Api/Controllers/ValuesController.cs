@@ -8,8 +8,8 @@ namespace NetLore.Api.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly ILogger _logger;
-        public ValuesController(ILogger logger)
+        private readonly ILogger<ValuesController> _logger;
+        public ValuesController(ILogger<ValuesController> logger)
         {
             _logger = logger;
         }
