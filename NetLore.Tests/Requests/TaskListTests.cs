@@ -94,6 +94,24 @@ namespace NetLore.Tests.Requests
             Assert.AreEqual(result, Unit.Value);
         }
 
+        [DataTestMethod]
+        [DataRow("", true, false)]
+        [DataRow("Test", true, true)]
+        [DataRow(null, false, false)]
+        [DataRow(null, true, false)]
+        public async Task SaveTaskList_Validation(string taskListName, bool instantiateModel, bool isValid)
+        {
+            Domain.Models.TaskList model = null;
+            if (instantiateModel)
+            {
+                model = new Domain.Models.TaskList { Name = taskListName };
+            }
+            var request = new SaveTaskListRequest(model);
+            var validator = new SaveTaskListValidator();
+            var validationResult = await validator.ValidateAsync(request);
+            Assert.AreEqual(isValid, validationResult.IsValid);
+        }
+
         [TestMethod]
         public async Task UpdateTaskList_Success()
         {
@@ -105,6 +123,26 @@ namespace NetLore.Tests.Requests
             var handler = new UpdateTaskListRequestHandler(_trackingContext, Mapper.Instance);
             var result = await handler.Handle(request, default(CancellationToken));
             Assert.AreEqual(Unit.Value, result);
+        }
+
+        [DataTestMethod]
+        [DataRow(1, "Test", true, true)]
+        [DataRow(1, null, true, false)]
+        [DataRow(1, null, false, false)]
+        [DataRow(0, "Test", true, false)]
+        [DataRow(0, null, true, false)]
+        [DataRow(0, null, false, false)]
+        public async Task UpdateTaskList_Validation(int id, string taskListName, bool instantiateModel, bool isValid)
+        {
+            Domain.Models.TaskList model = null;
+            if (instantiateModel)
+            {
+                model = new Domain.Models.TaskList { Name = taskListName };
+            }
+            var request = new UpdateTaskListRequest(id, model);
+            var validator = new UpdateTaskListValidator();
+            var validationResult = await validator.ValidateAsync(request);
+            Assert.AreEqual(isValid, validationResult.IsValid);
         }
 
         [TestMethod]

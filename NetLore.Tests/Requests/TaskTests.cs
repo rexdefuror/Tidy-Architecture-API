@@ -93,6 +93,24 @@ namespace NetLore.Tests.Requests
             Assert.AreEqual(result, Unit.Value);
         }
 
+        [DataTestMethod]
+        [DataRow("", true, false)]
+        [DataRow("TestTask", true, true)]
+        [DataRow(null, false, false)]
+        [DataRow(null, true, false)]
+        public async Task SaveTaskList_Validation(string taskName, bool instantiateModel, bool isValid)
+        {
+            Domain.Models.Task model = null;
+            if (instantiateModel)
+            {
+                model = new Domain.Models.Task { Name = taskName };
+            }
+            var request = new SaveTaskRequest(model);
+            var validator = new SaveTaskValidator();
+            var validationResult = await validator.ValidateAsync(request);
+            Assert.AreEqual(isValid, validationResult.IsValid);
+        }
+
         [TestMethod]
         public async Task UpdateTask_Success()
         {
@@ -104,6 +122,26 @@ namespace NetLore.Tests.Requests
             var handler = new UpdateTaskRequestHandler(_trackingContext, Mapper.Instance);
             var result = await handler.Handle(request, default(CancellationToken));
             Assert.AreEqual(Unit.Value, result);
+        }
+
+        [DataTestMethod]
+        [DataRow(1, "TestTask", true, true)]
+        [DataRow(1, null, true, false)]
+        [DataRow(1, null, false, false)]
+        [DataRow(0, "TestTask", true, false)]
+        [DataRow(0, null, true, false)]
+        [DataRow(0, null, false, false)]
+        public async Task UpdateTaskList_Validation(int id, string taskName, bool instantiateModel, bool isValid)
+        {
+            Domain.Models.Task model = null;
+            if (instantiateModel)
+            {
+                model = new Domain.Models.Task { Name = taskName };
+            }
+            var request = new UpdateTaskRequest(id, model);
+            var validator = new UpdateTaskValidator();
+            var validationResult = await validator.ValidateAsync(request);
+            Assert.AreEqual(isValid, validationResult.IsValid);
         }
 
         [TestMethod]
