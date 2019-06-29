@@ -1,10 +1,19 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetLore.Api.Filters;
 using NetLore.Infrastructure.Extensions;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace NetLore.Api
 {
@@ -28,6 +37,60 @@ namespace NetLore.Api
             {
                 options.Filters.Add(new ValidationExceptionFilter());
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddFluentValidators();
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+               .AddIdentityServerAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
+               {
+                   options.Authority = "https://demo.identityserver.io";
+                   options.ApiName = "api";
+                   options.ApiSecret = "secret";
+               });
+            services.AddApiVersioning(o =>
+            {
+                o.ReportApiVersions = true;
+                o.AssumeDefaultVersionWhenUnspecified = true;
+                o.DefaultApiVersion = new ApiVersion(1, 0);
+                o.ApiVersionReader = new HeaderApiVersionReader("x-api-version");
+            });
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1.0", new Info
+                {
+                    Version = "v1.0",
+                    Title = "Net Lore API",
+                    Description = "Tidy architecture guide API.",
+                    Contact = new Contact
+                    {
+                        Name = "rexdefuror",
+                        Url = "https://twitter.com/rexdefuror"
+                    },
+                    License = new License
+                    {
+                        Name = "DBAD Public Licence",
+                        Url = "https://dbad-license.org/"
+                    }
+                });
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    In = "header",
+                    Description = "Please enter into field the word 'Bearer' following by space and token",
+                    Name = "Authorization",
+                    Type = "apiKey"
+                });
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", Enumerable.Empty<string>() }
+                });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+                c.EnableAnnotations();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,8 +105,14 @@ namespace NetLore.Api
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Net Lore API V1.0");
+                c.DocExpansion(DocExpansion.None);
+            });
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
